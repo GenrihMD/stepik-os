@@ -16,20 +16,19 @@ power:
     popq %rcx
     ret
 
-#Function print
+# Function print
 print:
-  pushq %rax                    # caller-save register
-  pushq %rcx                    # caller-save register
+  pushq %rax 
+  pushq %rcx
 
   movq format@GOTPCREL(%rip), %rdi # set 1st parameter (format)
-  movq %rax, %rsi              # set 2nd parameter (current_number)
-  xor %rax, %rax              # because printf is varargs
+  movq %rax, %rsi # set 2nd parameter (current_number)
+  xor %rax, %rax # because printf is varargs
 
-  # Stack is already aligned because we pushed three 8 byte registers
-  call _printf                  # printf(format, current_number)
+  call _printf # printf(format, current_number)
 
-  popq %rcx                    # restore caller-save register
-  popq %rax                    # restore caller-save register
+  popq %rcx 
+  popq %rax 
   ret
 
 # Function main
