@@ -1,14 +1,26 @@
-.section __DATA, __data
-message:
-  .asciz "Hello world!\n"
-.section __TEXT, __text
-  .globl  _main
+# Simple exit program
+.section __TEXT,__text
+.globl _main
 _main:
-  mov   $0x02000004, %rax            # system call for write
-  mov   $1, %rdi                     # file descriptor 1 is stdout
-  movq  message@GOTPCREL(%rip), %rsi # get string address
-  mov   $13, %rdx                    # number of bytes
-  syscall                            # execute syscall (write)
-  mov   $0x02000001, %rax            # system call for exit
-  xor   $0, %rdi                     # exit code 0
-  syscall                            # execute syscall (exit)
+  mov $10, %eax
+  mov $3, %edx
+  call power
+  jmp end
+
+power:
+    pushq %rcx
+    mov %eax, %ecx
+  loop:
+      dec %edx
+      test %edx, %edx
+      jz endpower
+      imul %ecx, %eax
+      jmp loop
+  endpower:
+      popq %rcx
+      ret
+
+end:
+  movl $0x2000001, %eax 
+  movl $0, %ebx
+  syscall
