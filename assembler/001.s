@@ -1,4 +1,4 @@
-# Simple exit program
+# STEPIK // LESSON 21124 // step 5
 .section __TEXT,__text
 .globl _main
 _main:
@@ -7,6 +7,7 @@ _main:
   call power
   jmp end
 
+# Function power
 power:
     pushq %rcx
     mov %eax, %ecx
