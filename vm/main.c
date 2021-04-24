@@ -1,16 +1,10 @@
-typedef struct {
-    // registers
-    int a;
-    int b;
-    int c;
-    int d;
-} CPU;
+#include <stdlib.h>
+#include <stdio.h>
 
-CPU *new_CPU() {
-    return &(CPU){ 0, 0, 0, 0 };
-}
+#include "cpu.c"
 
 int main() {
     CPU *cpu = new_CPU();
+    printf("%d\n", cpu->a);
     return 0;
 }
